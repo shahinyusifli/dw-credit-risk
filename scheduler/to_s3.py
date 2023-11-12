@@ -82,7 +82,7 @@ def csv_to_s3_bucket():
         return f"Error in parquet_to_s3_bucket: {str(e)}"
 
 @flow()
-def import_data_to_s3(repo_name: str = "PrefectHQ/prefect"):
+def to_s3_flow():
     ids_from_dw = select_ids_from_dw()
     result_sql = sql_table_to_csv(ids_from_dw)
     if "Success" in result_sql:
@@ -92,4 +92,4 @@ def import_data_to_s3(repo_name: str = "PrefectHQ/prefect"):
         return result_sql
 
 if __name__ == "__main__":
-    import_data_to_s3.serve(name="import_data_to_s3_bucket")
+    to_s3_flow.serve(name="to_s3_bucket")
