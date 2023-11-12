@@ -9,6 +9,9 @@ import numpy as np
 from prefect.blocks.system import JSON
 
 redshift_credentials = JSON.load("redshift")
+s3_credentials = JSON.load("s3bucket")
+
+
 
 host = redshift_credentials.value['host']
 database = redshift_credentials.value['database']
@@ -74,9 +77,9 @@ def sql_table_to_csv(ids_from_dw):
 
 @task
 def csv_to_s3_bucket():
-    aws_access_key_id = 'AKIAYJ3CX5YVP65WHAGN'
-    aws_secret_access_key = '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'
-    aws_region = 'us-east-1'
+    aws_access_key_id = s3_credentials.value["aws_access_key_id"]
+    aws_secret_access_key = s3_credentials.value["aws_secret_access_key"]
+    aws_region = s3_credentials.value["aws_region"]
 
     s3_bucket = 'loans-credit-risk'
     s3_key = 'loans.csv'

@@ -1,7 +1,16 @@
 from prefect import flow, task
 from redshift_connector import RedshiftConnection
+from prefect.blocks.system import JSON
 
-sql_query = open('sql/copy_from_s3.sql').read()
+s3_credentials = JSON.load("s3bucket")
+
+sql_query = """
+COPY dev.bronze.loans
+FROM 's3://loans-credit-risk/loans.csv'
+CREDENTIALS 'aws_access_key_id={0};aws_secret_access_key={1}'
+FORMAT AS CSV;
+""".format(s3_credentials.value["aws_access_key_id"], s3_credentials.value["aws_secret_access_key"])
+
 executer = RedshiftConnection()
 
 @task
