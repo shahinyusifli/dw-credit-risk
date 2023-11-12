@@ -8,11 +8,11 @@ sql_query = open('sql/generate_dim_calendar.sql').read()
 
 def establish_connection():
     try:
-        host = redshift_credentials['host']
-        database = redshift_credentials['database']
-        user = redshift_credentials['user']
-        password = redshift_credentials['password']
-        port = redshift_credentials['port']
+        host = redshift_credentials.value['host']
+        database = redshift_credentials.value['database']
+        user = redshift_credentials.value['user']
+        password = redshift_credentials.value['password']
+        port = redshift_credentials.value['port']
 
         # Establish a connection
         conn = psycopg2.connect(

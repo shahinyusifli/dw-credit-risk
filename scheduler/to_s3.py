@@ -63,7 +63,7 @@ def sql_table_to_csv(ids_from_dw):
                            "collection_recovery_fee", "last_pymnt_amnt", "collections_12_mths_ex_med", 
                            "mths_since_last_major_derog", "policy_code", "annual_inc_joint"
                            ]
-
+        
         df[numeric_columns] = df[numeric_columns].replace(np.nan, 0)
         df.to_csv('data/loans.csv', index=False, header=False)
 
