@@ -103,4 +103,10 @@ def to_s3_flow():
         return result_sql
 
 if __name__ == "__main__":
-    to_s3_flow.serve(name="to_s3_bucket")
+    to_s3_flow.serve(
+        name="csv_to_s3_bucket",
+        cron="0 0 * * *",
+        tags=["db", "bucket", "s3"],
+        description="Flow fetch 10 rows from transactional db to s3 bucket",
+        version="dw-credit/deployments"
+    )

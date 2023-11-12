@@ -46,4 +46,10 @@ def to_dim_member_flow():
     to_dim_member()
 
 if __name__ == "__main__":
-    to_dim_member_flow.serve(name="to_dim_member")
+    to_dim_member_flow.serve(
+        name="to_dim_member",
+        cron="30  0 * * *",
+        tags=["gold", "dim_member"],
+        description="Fetch data from silver stage to dim_member of gold stage",
+        version="dw-credit/deployments",
+    )

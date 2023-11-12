@@ -46,4 +46,10 @@ def to_fct_credit_flow():
     to_fct_credit()
 
 if __name__ == "__main__":
-    to_fct_credit_flow.serve(name="to_fct_credit")
+    to_fct_credit_flow.serve(
+        name="to_fct_credit",
+        cron="50  0 * * *",
+        tags=["gold", "dim_grade"],
+        description="Fetch data from silver stage to dim_fct_grade of gold stage",
+        version="dw-credit/deployments"
+    )

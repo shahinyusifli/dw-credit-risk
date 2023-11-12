@@ -46,4 +46,10 @@ def to_bronze_flow():
     to_bronze()
 
 if __name__ == "__main__":
-    to_bronze_flow.serve(name="to_bronze")
+    to_bronze_flow.serve(
+        name="to_bronze",
+        cron="15 0 * * *",
+        tags=["s3", "bucket", "bronze"],
+        description="Flow copy data file from bucket to bronze stage of dw",
+        version="dw-credit/deployments"
+    )
