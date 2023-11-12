@@ -1,15 +1,18 @@
 from prefect import flow, task
 import psycopg2
+from prefect.blocks.system import JSON
+
+redshift_credentials = JSON.load("redshift")
 
 sql_query = open('sql/generate_dim_calendar.sql').read()
 
 def establish_connection():
     try:
-        host = 'dw-loan.c8eysn3nvdo8.eu-north-1.redshift.amazonaws.com'
-        database = 'dev'
-        user = 'awsuser'
-        password = 'Strongpassword1'
-        port = '5439'
+        host = redshift_credentials['host']
+        database = redshift_credentials['database']
+        user = redshift_credentials['user']
+        password = redshift_credentials['password']
+        port = redshift_credentials['port']
 
         # Establish a connection
         conn = psycopg2.connect(

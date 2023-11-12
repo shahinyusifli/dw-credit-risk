@@ -6,21 +6,31 @@ from prefect import flow, task
 import psycopg2
 import logging
 import numpy as np
+from prefect.blocks.system import JSON
 
-host = 'dw-loan.c8eysn3nvdo8.eu-north-1.redshift.amazonaws.com'
-database = 'dev'
-user = 'awsuser'
-password = 'Strongpassword1'
-port = '5439'
+redshift_credentials = JSON.load("redshift")
+
+host = redshift_credentials.value['host']
+database = redshift_credentials.value['database']
+user = redshift_credentials.value['user']
+password = redshift_credentials.value['password']
+port = redshift_credentials.value['port']
 
 # Establish a connection
-conn = psycopg2.connect(
-    host=host,
-    database=database,
-    user=user,
-    password=password,
-    port=port
-)
+try:
+    conn = psycopg2.connect(
+        host=host,
+        database=database,
+        user=user,
+        password=password,
+        port=port
+    )
+except psycopg2.Error as psycopg_error:
+    logging.error(f"Psycopg2 database connection error: {psycopg_error}")
+    raise  # Re-raise the exception for better error handling further up the stack
+except Exception as e:
+    logging.error(f"Error establishing a database connection: {str(e)}")
+    raise e
 
 query_select_ids = open('sql/select_ids_from_dw.sql').read()
 
@@ -31,12 +41,11 @@ def select_ids_from_dw():
         conn.close()
         return ids_from_dw
     except psycopg2.Error as psycopg_error:
-        logging.error(f"Psycopg2 database error: {psycopg_error}")
+        logging.error(f"Psycopg2 database error in select_ids_from_dw: {psycopg_error}")
         raise  # Re-raise the exception for better error handling further up the stack
     except Exception as e:
         logging.error(f"Error in select_ids_from_dw: {str(e)}")
         raise e
-
 
 @task
 def sql_table_to_csv(ids_from_dw):
@@ -60,8 +69,8 @@ def sql_table_to_csv(ids_from_dw):
 
         return "Success: Data exported to Parquet."
     except Exception as e:
-        return f"Error in sql_table_to_parquet: {str(e)}"
-
+        logging.error(f"Error in sql_table_to_parquet: {str(e)}")
+        raise e
 
 @task
 def csv_to_s3_bucket():
@@ -77,9 +86,11 @@ def csv_to_s3_bucket():
         s3.upload_file('data/loans.csv', s3_bucket, s3_key)
         return f'Success: Data uploaded to S3 bucket {s3_bucket}/{s3_key}'
     except NoCredentialsError:
-        return "Error: AWS credentials not found."
+        logging.error("AWS credentials not found.")
+        raise
     except Exception as e:
-        return f"Error in parquet_to_s3_bucket: {str(e)}"
+        logging.error(f"Error in parquet_to_s3_bucket: {str(e)}")
+        raise e
 
 @flow()
 def to_s3_flow():
