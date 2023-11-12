@@ -1,7 +1,5 @@
-from botocore.exceptions import NoCredentialsError
 from prefect import flow, task
 import psycopg2
-import pandas as pd
 
 sql_query = open('sql/copy_from_s3.sql').read()
 

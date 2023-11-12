@@ -1,4 +1,3 @@
-from botocore.exceptions import NoCredentialsError
 from prefect import flow, task
 import psycopg2
 
