@@ -1,5 +1,10 @@
 # dw-credit-risk
 Data warehouse and pipeline for credit risk analysis
+### Architecture
+![alt text](https://github.com/shahinyusifli/dw-credit-risk/blob/main/document/architecture.png)
+Also, we can look through pipelines
+![alt text](https://github.com/shahinyusifli/dw-credit-risk/blob/main/document/pipelines_part_1.png)
+![alt text](https://github.com/shahinyusifli/dw-credit-risk/blob/main/document/pipelines_part_2.png)
 ### Setup
 First of all, all nesesary libraries should be installed. For this purpose, you should run this command
 
