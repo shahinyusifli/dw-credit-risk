@@ -1,7 +1,5 @@
 CREATE TABLE gold.fct_credit (
-    sk integer NOT NULL identity(1, 1) ENCODE raw
-    distkey
-,
+    sk integer NOT NULL identity(1, 1) ENCODE raw,
         id integer ENCODE az64,
         sk_member integer ENCODE az64,
         sk_ownership integer ENCODE az64,
@@ -16,7 +14,6 @@ CREATE TABLE gold.fct_credit (
         installment real ENCODE raw,
         issue_d date ENCODE az64,
         url character varying(255) ENCODE lzo,
-        desc character varying(256) ENCODE lzo,
         purpose character varying(255) ENCODE lzo,
         title character varying(255) ENCODE lzo,
         dti real ENCODE raw,
@@ -44,6 +41,8 @@ CREATE TABLE gold.fct_credit (
         policy_code integer ENCODE az64,
         application_type character varying(255) ENCODE lzo,
         annual_inc_joint integer ENCODE az64,
+        inserted_time TIMESTAMP DEFAULT GETDATE(),
+        updated_time timestamp DEFAULT NULL,
         PRIMARY KEY (sk),
         FOREIGN KEY (sk_grade) REFERENCES gold.dim_grade(sk)
 ) DISTSTYLE AUTO

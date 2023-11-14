@@ -1,7 +1,7 @@
 from prefect import flow, task
 from redshift_connector import RedshiftConnection
 
-sql_query = open('sql/upsert_bronze_to_silver.sql').read()
+sql_query = open('sql/to_silver.sql').read()
 executer = RedshiftConnection()
 
 @task

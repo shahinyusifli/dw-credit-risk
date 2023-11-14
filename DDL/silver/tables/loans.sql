@@ -52,6 +52,8 @@ CREATE TABLE IF NOT EXISTS dev.silver.loans (
     policy_code INTEGER,
     application_type VARCHAR(255),
     annual_inc_joint INTEGER,
+    inserted_time timestamp,
+    updated_time timestamp,
     primary key(sk)
 );
 

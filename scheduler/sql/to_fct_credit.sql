@@ -46,8 +46,8 @@ INSERT INTO dev.gold.fct_credit
     SELECT 
         id, 
         (Select sk from dev.gold.dim_member where id=member_id and is_valid=True LIMIT 1),
-        (SELECT sk FROM dev.gold.dim_ownership WHERE home_ownership = home_ownership LIMIT 1), 
-        (SELECT sk FROM dev.gold.dim_status WHERE verification_status = verification_status and loan_status=loan_status LIMIT 1), 
+        (SELECT sk FROM dev.gold.dim_ownership WHERE home_ownership = home_ownership LIMIT 1),
+        (SELECT sk FROM dev.gold.dim_status WHERE loan_status=loan_status LIMIT 1),
         (SELECT sk FROM dev.gold.dim_grade WHERE grade=grade and sub_grade=sub_grade LIMIT 1), 
         (SELECT sk FROM dev.gold.dim_payment WHERE total_pymnt = total_pymnt 
         AND total_pymnt_inv = total_pymnt_inv AND last_pymnt_d = last_pymnt_d 

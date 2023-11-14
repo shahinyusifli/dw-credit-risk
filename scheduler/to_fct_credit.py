@@ -1,7 +1,7 @@
 from prefect import flow, task
 from redshift_connector import RedshiftConnection
 
-sql_query = open('sql/insert_to_fct_credit.sql').read()
+sql_query = open('sql/to_fct_credit.sql').read()
 executer = RedshiftConnection()
 
 @task

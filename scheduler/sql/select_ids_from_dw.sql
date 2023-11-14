@@ -1,3 +1,1 @@
-SELECT 
-id 
-FROM dev.bronze.loans
+SELECT id FROM dev.bronze.loans

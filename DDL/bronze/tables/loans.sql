@@ -49,5 +49,7 @@ CREATE TABLE IF NOT EXISTS dev.bronze.loans (
     mths_since_last_major_derog CHAR(255),
     policy_code CHAR(255),
     application_type CHAR(255),
-    annual_inc_joint CHAR(255)
+    annual_inc_joint CHAR(255),
+    inserted_time timestamp,
+    updated_time timestamp
 );

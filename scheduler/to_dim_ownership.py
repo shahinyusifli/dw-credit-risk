@@ -1,7 +1,7 @@
 from prefect import flow, task
 from redshift_connector import RedshiftConnection
 
-sql_query = open('sql/insert_into_dim_ownership.sql').read()
+sql_query = open('sql/to_dim_ownership.sql').read()
 executer = RedshiftConnection()
 
 @task

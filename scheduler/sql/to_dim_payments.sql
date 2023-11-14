@@ -3,12 +3,11 @@ INSERT INTO dev.gold.dim_payment
     last_pymnt_amnt, next_pymnt_d)
 (
     SELECT 
-    total_pymnt, total_pymnt_inv, last_pymnt_d,
+    distinct total_pymnt, total_pymnt_inv, last_pymnt_d,
     last_pymnt_amnt, next_pymnt_d
 FROM dev.silver.loans
-WHERE (total_pymnt, total_pymnt_inv, last_pymnt_d,
-    last_pymnt_amnt, next_pymnt_d) 
-    NOT IN (SELECT total_pymnt, total_pymnt_inv, last_pymnt_d,
+WHERE (total_pymnt, total_pymnt_inv, last_pymnt_d, last_pymnt_amnt, next_pymnt_d) 
+    NOT IN (SELECT distinct total_pymnt, total_pymnt_inv, last_pymnt_d,
     last_pymnt_amnt, next_pymnt_d FROM dev.gold.dim_payment)
 
 );

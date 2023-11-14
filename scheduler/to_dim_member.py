@@ -1,7 +1,7 @@
 from prefect import flow, task
 from redshift_connector import RedshiftConnection
 
-sql_query = open('sql/merge_into_dim_member.sql').read()
+sql_query = open('sql/to_dim_member.sql').read()
 executer = RedshiftConnection()
 
 @task

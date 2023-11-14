@@ -2,7 +2,7 @@ from prefect import flow, task
 from redshift_connector import RedshiftConnection
 
 
-sql_query = open('sql/generate_dim_calendar.sql').read()
+sql_query = open('sql/to_dim_calendar.sql').read()
 executer = RedshiftConnection()
 
 @task

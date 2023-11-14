@@ -5,6 +5,7 @@ CREATE TABLE dev.gold.dim_payment (
     total_pymnt_inv REAL ENCODE raw,
     last_pymnt_d DATE REFERENCES dev.gold.dim_calendar(date_key),
     last_pymnt_amnt REAL ENCODE raw,
-    next_pymnt_d DATE REFERENCES dev.gold.dim_calendar(date_key)
+    next_pymnt_d DATE REFERENCES dev.gold.dim_calendar(date_key),
+    inserted_time TIMESTAMP DEFAULT GETDATE(),
     PRIMARY KEY (sk)
 ) DISTSTYLE AUTO SORTKEY (sk);

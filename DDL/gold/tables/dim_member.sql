@@ -4,8 +4,8 @@ CREATE TABLE dev.gold.dim_member (
     emp_length VARCHAR(255) ENCODE lzo,
     zip_code VARCHAR(255) ENCODE lzo,
     addr_state VARCHAR(255) ENCODE lzo,
-    is_valid BOOLEAN,
-    valid_to DATE,
-    valid_from DATE,
+    is_valid BOOLEAN DEFAULT True,
+    inserted_time TIMESTAMP DEFAULT GETDATE(),
+    updated_time TIMESTAMP DEFAULT NULL,
     PRIMARY KEY (sk)
 ) DISTSTYLE AUTO SORTKEY (sk);
