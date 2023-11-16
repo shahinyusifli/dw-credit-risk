@@ -8,9 +8,9 @@ Next, we move the data to the silver stage. In this stage, we apply business log
 
 The presentation pipelines hold data transformations, like changing data types and selecting columns with descriptions. To make these transformations efficient, we use SQL within ELT pipelines. ELT stands for Extract, Load, Transform, where transformations are done directly within the data warehouse.
 
-Inside our project, we've organized all the necessary tools for these transformations. This includes Stored Procedures, User-Defined Functions (UDFs), and SQL scripts. They are neatly placed within a scheduling application called Prefect, which acts as our project's scheduler. This setup helps streamline and optimize the execution of data transformations for speed and performance.
-![alt text](https://github.com/shahinyusifli/dw-credit-risk/blob/main/document/pipelines_part_1.png)
-![alt text](https://github.com/shahinyusifli/dw-credit-risk/blob/main/document/pipelines_part_2.png)
+Inside our project, we've organized all the necessary tools for these transformations. This includes Stored Procedures, User-Defined Functions (UDFs), and SQL scripts. They are neatly placed within a scheduling application called Prefect, which acts as our project's scheduler. This setup helps streamline and optimize the execution of data transformations for speed and performance. We can see pipelines below illustration
+
+![alt text](https://github.com/shahinyusifli/dw-credit-risk/blob/main/document/pipelines.png)
 
 ### Setup
 First of all, all necessary libraries should be installed. For this purpose, you should run this command.
@@ -57,5 +57,6 @@ Data loading cover operations for data loading to dimensions and fact table. Lis
 - to-dim-status-flow/to_dim_status
 - to-fct-credit-flow/to_fct_credit
 - to-silver-flow/to_silver
-We can see pipeline below illustration
-![alt text](https://github.com/shahinyusifli/dw-credit-risk/blob/main/document/pipelines.png)
+
+
+
