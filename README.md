@@ -1,3 +1,5 @@
+# Data warehouse and scheduled ELT pipelines for credit risk analyses.
+
 ### Architecture
 Our data is stored in Amazon Redshift and comes from an S3 bucket. Initially, the data in the S3 bucket is imported from a source database, but it's limited to just 10 rows. Inside our data warehouse, we organize the data into three layers. The first layer is like a raw data dumping ground where we accept data without enforcing any specific types or constraints. Typically, all columns are treated as characters here.
 
