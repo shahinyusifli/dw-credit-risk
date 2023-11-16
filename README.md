@@ -57,3 +57,5 @@ Data loading cover operations for data loading to dimensions and fact table. Lis
 - to-dim-status-flow/to_dim_status
 - to-fct-credit-flow/to_fct_credit
 - to-silver-flow/to_silver
+We can see pipeline below illustration
+![alt text](https://github.com/shahinyusifli/dw-credit-risk/blob/main/document/pipelines.png)
