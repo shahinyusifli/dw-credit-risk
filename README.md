@@ -8,9 +8,7 @@ Next, we move the data to the silver stage. In this stage, we apply business log
 
 The presentation pipelines hold data transformations, like changing data types and selecting columns with descriptions. To make these transformations efficient, we use SQL within ELT pipelines. ELT stands for Extract, Load, Transform, where transformations are done directly within the data warehouse.
 
-Inside our project, we've organized all the necessary tools for these transformations. This includes Stored Procedures, User-Defined Functions (UDFs), and SQL scripts. They are neatly placed within a scheduling application called Prefect, which acts as our project's scheduler. This setup helps streamline and optimize the execution of data transformations for speed and performance. We can see pipelines below illustration
-
-![alt text](https://github.com/shahinyusifli/dw-credit-risk/blob/main/document/pipelines.png)
+Inside our project, we've organized all the necessary tools for these transformations. This includes Stored Procedures, User-Defined Functions (UDFs), and SQL scripts. They are neatly placed within a scheduling application called Prefect, which acts as our project's scheduler. This setup helps streamline and optimize the execution of data transformations for speed and performance.
 
 ### Setup
 First of all, all necessary libraries should be installed. For this purpose, you should run this command.
@@ -33,7 +31,19 @@ For running metioned pipeles, you should login [Prefect Cloud](https://www.prefe
 ```bash
   $ prefect cloud login
 ```
-After creating a connection between local and cloud environments. You can use a script or UI for running pipelines. And you should run to-s3-flow/csv_to_s3_bucket and to-bronze-flow/to_bronze respectively. They are scheduled for each day but they can be triggered manually.
+After creating a connection between local and cloud environments. You can use a script or UI for running pipelines. They are scheduled for each day but they can be triggered manually.
+You can use these scripts for deploiyng flows to Prefect Cloud. Mentioned steps should be done for each pipeline/flow. Commands:
+
+```bash
+  $ cd .\scheduler\ 
+  $ prefect deployment run '{flow_name/deployment_name}'
+  $ python {python file which contains flow}
+```
+
+We can see the pipelines below illustration which are scheduled according presented order.
+
+![alt text](https://github.com/shahinyusifli/dw-credit-risk/blob/main/document/pipelines.png)
+
 
 Type of columns are divided into 3 main types Integer, Char, and Real(Decimal). IDs and categorical values are represented in Integer but numeric values are represented with Real(Decimal) data type. Finally, some categorical and descriptive information are selected as Char. SQLite is used as a data source because most of the time relational databases are sources of predictive and descriptive applications and SQLLite meets minimal requirements of this.
 ### Data Transformation
