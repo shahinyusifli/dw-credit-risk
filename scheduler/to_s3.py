@@ -7,35 +7,13 @@ import psycopg2
 import logging
 import numpy as np
 from prefect.blocks.system import JSON
+from redshift_connector import RedshiftConnection
 
-redshift_credentials = JSON.load("redshift")
+executer = RedshiftConnection()
 s3_credentials = JSON.load("s3bucket")
-
-
-
-host = redshift_credentials.value['host']
-database = redshift_credentials.value['database']
-user = redshift_credentials.value['user']
-password = redshift_credentials.value['password']
-port = redshift_credentials.value['port']
-
-# Establish a connection
-try:
-    conn = psycopg2.connect(
-        host=host,
-        database=database,
-        user=user,
-        password=password,
-        port=port
-    )
-except psycopg2.Error as psycopg_error:
-    logging.error(f"Psycopg2 database connection error: {psycopg_error}")
-    raise  # Re-raise the exception for better error handling further up the stack
-except Exception as e:
-    logging.error(f"Error establishing a database connection: {str(e)}")
-    raise e
-
 query_select_ids = open('sql/select_ids_from_dw.sql').read()
+
+conn = executer.establish_connection()
 
 @task
 def select_ids_from_dw():
