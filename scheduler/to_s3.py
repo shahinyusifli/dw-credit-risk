@@ -59,7 +59,7 @@ def csv_to_s3_bucket():
     aws_secret_access_key = s3_credentials.value["aws_secret_access_key"]
     aws_region = s3_credentials.value["aws_region"]
 
-    s3_bucket = 'loans-credit-risk'
+    s3_bucket = 'top-ten-credits'
     s3_key = 'loans.csv'
 
     try:
